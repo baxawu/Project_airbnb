@@ -1,0 +1,30 @@
+.PageTitle{
+    font-size: 27px;
+    line-height: 3em;
+}
+
+.wrapImg{
+    height: 500px;
+    img{
+        border-radius: 18px;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        width: 100%;
+    }
+}
+
+.wrapperBtn{
+    background: var(--primary);
+    border-radius: 6px;
+    color: var(--white);
+    margin-top: 10px;
+    padding: 12px;
+    width: 100%;
+}
+
+.gia{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}

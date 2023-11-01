@@ -7,6 +7,7 @@ import MainLayout from "./layouts/MainLayout/MainLayout";
 import UserProvider from "./contexts/UserContext/UserContext";
 import ProtectedRoute from "./routers/ProtectedRoute"
 import ProductDetails from "./modules/home/productDetails/ProductDetails";
+import BookingDetals from "./modules/home/bookingDetails/bookingDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="details/:detailsid" element={<ProductDetails />} />
+            <Route path="room-details/:detailsid" element={<BookingDetals />} />
 
             <Route element={<ProtectedRoute />}>
 

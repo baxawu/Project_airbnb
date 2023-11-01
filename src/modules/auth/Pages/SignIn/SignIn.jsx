@@ -36,6 +36,8 @@ export default function SignIn() {
   const navigate = useNavigate();
   const [searchParams] =useSearchParams()
   const { currentUser, handleSignin: onSigninSuccess } = useUserContext();
+console.log('currentUser',currentUser);
+
   const {
     mutate: handleSignin,
     error,

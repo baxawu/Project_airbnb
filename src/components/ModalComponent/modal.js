@@ -1,9 +1,10 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import style1 from "./modalcompo.module.scss";
+import { useContext, useState } from "react";
+import { Context } from "../FormSoNguoi/FormSoNguoi";
 
 const style = {
   position: "absolute",
@@ -17,13 +18,13 @@ const style = {
 };
 
 export default function ModalComponent({children}) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const userCount = useContext(Context);
   return (
-    <div>
-      <Button className={style1.jss1} onClick={handleOpen}>Khach</Button>
+    <div className={style1.wrapperModal}>
+      <Button className={style1.jss1} onClick={handleOpen}>{userCount}Khach </Button>
       <Modal
         open={open}
         onClose={handleClose}
