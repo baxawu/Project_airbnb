@@ -19,7 +19,6 @@ fetcher.interceptors.request.use((request) => {
   
     return request;
   });
-  
   // Response Interceptor
   fetcher.interceptors.response.use(
     (response) => {

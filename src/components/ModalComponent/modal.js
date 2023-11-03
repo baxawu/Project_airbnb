@@ -1,40 +1,40 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import style1 from "./modalcompo.module.scss";
-import { useContext, useState } from "react";
-import { Context } from "../FormSoNguoi/FormSoNguoi";
+import { Popover } from "@mui/material";
+import { useState } from "react";
+import  style from './modalcomp.module.scss'
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid white",
-  p: 4,
+export default function ModalComponent({children,songuoi}) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
 };
 
-export default function ModalComponent({children}) {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const userCount = useContext(Context);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
   return (
-    <div className={style1.wrapperModal}>
-      <Button className={style1.jss1} onClick={handleOpen}>{userCount}Khach </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          {children}
-        </Box>
-      </Modal>
-    </div>
+    
+<div className={style.wrapperModal}>
+<Button aria-describedby={id} variant="contained" onClick={handleClick}>
+  {songuoi}Khách
+</Button>
+<Popover
+  id={id}
+  open={open}
+  anchorEl={anchorEl}
+  onClose={handleClose}
+  anchorOrigin={{
+    vertical: 'bottom',
+    horizontal: 'left',
+  }}
+>
+ {children}
+</Popover>
+</div>
   );
 }

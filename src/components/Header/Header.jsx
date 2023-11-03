@@ -14,11 +14,13 @@ import {
   Typography
 } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import { useUserContext } from "../../contexts/UserContext/UserContext";
 
 
 
 
 export default function Header() {
+
   const navigate = useNavigate()
   const pages = ["Nơi Ở", "Trải Nghiệm", "Trải nghiệm trực tuyến"];
 
@@ -39,7 +41,7 @@ export default function Header() {
        <Grid container item justifyContent="center" alignItems="center" sx={{ display: { xs: 'none', lg: 'flex' } }} lg={5}>
               {pages.map((page, index) => {
                 return (
-                  <a className={style.jss3} onClick={() => handleScroll(index)}>
+                  <a key={index} className={style.jss3} onClick={() => handleScroll(index)}>
                     <Typography
                       variant="h4"
                       sx={{ fontSize: 14, fontWeight: 500 }}

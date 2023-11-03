@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 
-
+import FormControl1 from '../../../components/FormControl/FormControl'
   
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -21,17 +21,17 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import banners from "./Banner.data.json";
 import ModalComponent from "../../../components/ModalComponent/modal";
+import { calculateTotalGuest } from "../../../components/FormControl/constan";
 
 export default function Banner() {
  
   const [locationName, setlocationId] = useState(null);
-  const [comeId, setComeId] = useState(null);
-  const [leaveId, setleaveId] = useState(null);
   const [people, setPeople] = useState("");
   const [number,setNumber] = useState(0);  
   const [checkin,setCheckin] = useState('');
   const [checkout,setcheckout] = useState('');
-
+  const [songuoi,setSoNguoi] =useState(0)
+  const [vitri,setVitri] = useState(1)
 
   const navigate = useNavigate();
 
@@ -49,27 +49,11 @@ export default function Banner() {
     enabled: !!locationName,
   });
   
-  const locationSystem = getShowLocation?.viTri || [];
-  console.log('locationSystem',getShowLocation);
-
-  const cinemas = locationSystem?.map((cinemas) => {
-    return cinemas.cumRapChieu.filter((cinema) => {
-      return cinema.maCumRap === comeId;
-    });
-  });
-
-
-
-  
+  const locationSystem = getShowLocation?.id || [];
   const handleChangeLocation = (evt) => {
     setlocationId(evt.target.value);
   };
-  const handleChangeCome = (evt) => {
-    setComeId(evt.target.value);
-  };
-  const handleChangeLeave = (evt) => {
-    setleaveId(evt.target.value);
-  };
+
   const handleChangePeople = (evt) => {
     setPeople(evt.target.value);
   };
@@ -83,22 +67,21 @@ const hadleGetDateNgaydi =(e)=>{
     if (!locationName) {
       Swal.fire("Bạn chưa đặt chỗ", "Vui lòng điền đầy đủ thông tin!");
       return;
-    } else if (!comeId) {
+    } else if (!checkin) {
       Swal.fire("Bạn chưa chọn ngày đến ", "Vui lòng chọn ngày đến!");
       return;
-    } else if (!leaveId) {
+    } else if (!checkout) {
       Swal.fire("Bạn chưa chọn ngày đi", "Vui lòng chọn ngày đi!");
       return;
-    } else if (!people) {
+    } else if (!songuoi) {
       Swal.fire(
         "Bạn chưa chọn số lượng",
         "Vui lòng chọn số lượng!"
       );
       return;
     }
-    navigate(`/purchase/${people}`);
+    navigate(`/details/${locationName}`);
   };
-
   //setup slider
   const slider = useRef();
 
@@ -191,22 +174,10 @@ const hadleGetDateNgaydi =(e)=>{
           </Grid>
           <Grid item xs={2}>
             <div style={{ height: "100%" }}>
-              <FormControl className={style.jss5}>
-              <ModalComponent>
-              <div className={style.wrapper}>
-            <div className={style.Box1}>
-              <h4>Adults</h4>
-              <h6>Ages 13 or above</h6>
-            </div>
-            <div>
-              <button onClick={()=>{setNumber(number-1)}}>-</button>{number}<button onClick={()=>{setNumber(number+1)}}>+</button>
-            {console.log('num ',number)}
-            </div>
-           
-            
-          </div>
-              </ModalComponent>
-              </FormControl>
+            <ModalComponent>
+         <FormControl1  onHandleTotalGuest={calculateTotalGuest} shareGuest={setSoNguoi}/>
+        </ModalComponent>
+
             </div>
           </Grid>
           <Grid item xs={2}>

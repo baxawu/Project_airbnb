@@ -8,8 +8,10 @@ import style from "./stylesHeader.module.scss";
 import { useUserContext } from "../../contexts/UserContext/UserContext";
 import Swal from 'sweetalert2';
 import {Typography} from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
 export default function BasicMenu() {
+  const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -20,7 +22,7 @@ export default function BasicMenu() {
   };
 
   const { currentUser, handleSignout } = useUserContext();
-
+console.log('currentUser',currentUser);
   const handleScroll = (id) => {
     const element = document.getElementById(id);
     element.scrollIntoView({ behavior: "smooth" })
@@ -76,8 +78,16 @@ export default function BasicMenu() {
           <>
             <img src="./img/logo.png" className={style.jss5} />
             <Typography variant="h3" sx={{ fontSize: 20, fontWeight: 500, padding: 2 }}>
-              {currentUser.name} {/* Display the user's name */}
+              {currentUser?.user?.name} {/* Display the user's name */}
             </Typography>
+            {currentUser?.user?.role === "USER" ? (
+  <Typography variant="h3" sx={{ fontSize: 20, fontWeight: 500, padding: 2 }}>
+   <a>Chuyển sang trang admin</a>
+  </Typography>
+) : (
+  <></>
+)}
+
             <MenuItem onClick={handleClose} className={style.menuItems}>
               <Typography variant="h3" sx={{ fontSize: 16, fontWeight: 500 }}>
                 <a onClick={handleSignoutSwal}>Đăng Xuất</a>
